@@ -1,5 +1,6 @@
+#include<GL/glew.h>
 #include <GLFW/glfw3.h> // 引入GLFW库的头文件，用于创建窗口、处理OpenGL上下文及输入输出事件
-
+#include<iostream>
 int main(void)
 {
     GLFWwindow* window; // 定义一个指向GLFW窗口对象的指针
@@ -7,6 +8,7 @@ int main(void)
     /* 初始化GLFW库 */
     if (!glfwInit()) // 调用glfwInit函数初始化GLFW库，如果初始化失败返回-1
         return -1;
+
 
     /* 创建一个窗口，并为其分配OpenGL上下文 */
     window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL); 
@@ -20,6 +22,15 @@ int main(void)
 
     /* 使窗口的上下文成为当前线程的主上下文 */
     glfwMakeContextCurrent(window); 
+
+
+    if (glewInit() != GLEW_OK) {
+        std::cout << "error" << std::endl;
+    }
+
+    std::cout << glGetString(GL_VERSION) << std::endl;
+
+
     // 设置刚刚创建的窗口的OpenGL上下文为当前线程的主上下文，这样后续的OpenGL指令才会作用于该窗口
 
     /* 当用户没有关闭窗口时，循环运行 */
